@@ -1,20 +1,20 @@
 :root {
   color-scheme: light;
-  --bg: #f5f4f2;
-  --top: #eeeae5;
-  --panel: #fbfaf8;
-  --panel-soft: #f1efec;
-  --ink: #353431;
-  --muted: #77736e;
-  --line: #dfdcd7;
-  --accent: #d77968;
-  --accent-strong: #bc604f;
-  --lime: #d77968;
-  --mint: #9b9389;
+  --bg: #f3f6fa;
+  --top: #e8eef5;
+  --panel: #fbfcfe;
+  --panel-soft: #f0f4f8;
+  --ink: #293746;
+  --muted: #6d7c8d;
+  --line: #d9e2ec;
+  --accent: #5f83a8;
+  --accent-strong: #476b90;
+  --lime: #7f9fbd;
+  --mint: #9db6cc;
   --gold: #f5c04d;
   --purple: #bd79de;
   --red: #b84f4a;
-  --shadow: 0 8px 24px rgba(53, 52, 49, 0.07);
+  --shadow: 0 8px 24px rgba(41, 55, 70, 0.07);
 }
 
 * {
@@ -60,7 +60,7 @@ button {
   margin: 0 -18px;
   padding: 28px 36px 24px;
   background:
-    linear-gradient(180deg, #eeeae5 0%, #fbfaf8 100%);
+    linear-gradient(180deg, #e8eef5 0%, #fbfcfe 100%);
 }
 
 .eyebrow {
@@ -122,9 +122,9 @@ h2 {
   align-content: center;
   gap: 7px;
   padding: 14px;
-  border: 1px solid rgba(90, 84, 76, 0.12);
+  border: 1px solid rgba(95, 131, 168, 0.12);
   border-radius: 8px;
-  background: #f4f1ed;
+  background: #f1f5f9;
   box-shadow: 0 4px 14px rgba(23, 26, 47, 0.05);
 }
 
@@ -140,7 +140,7 @@ h2 {
 
 .panel {
   padding: 20px;
-  border: 1px solid rgba(90, 84, 76, 0.12);
+  border: 1px solid rgba(95, 131, 168, 0.12);
   border-radius: 8px;
   background: var(--panel);
   box-shadow: var(--shadow);
@@ -154,18 +154,18 @@ h2 {
 .progress-page-header {
   margin: -20px -20px 22px;
   padding: 20px;
-  border-bottom: 1px solid #ded8d1;
-  background: #ece8e3;
+  border-bottom: 1px solid #d6e1ec;
+  background: #e8eef5;
 }
 
 .progress-page-header h1 {
   margin-bottom: 0;
-  color: #494640;
+  color: #3d5872;
   font-size: clamp(2.35rem, 9vw, 3.55rem);
 }
 
 .progress-page-header .eyebrow {
-  color: #7c766f;
+  color: #708295;
 }
 
 .weekly-progress-section {
@@ -266,7 +266,7 @@ input:focus,
 select:focus,
 textarea:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(215, 121, 104, 0.18);
+  box-shadow: 0 0 0 3px rgba(95, 131, 168, 0.18);
 }
 
 .exercise-list,
@@ -312,7 +312,7 @@ textarea:focus {
 }
 
 .daily-table thead th {
-  background: #ebe7e2;
+  background: #e8eef5;
   color: var(--muted);
   font-size: 0.74rem;
   font-weight: 900;
@@ -550,8 +550,8 @@ textarea:focus {
 }
 
 .week-card.is-complete {
-  border-color: rgba(215, 121, 104, 0.3);
-  background: #f8ece8;
+  border-color: rgba(95, 131, 168, 0.3);
+  background: #edf3f8;
 }
 
 .week-card strong {
@@ -638,7 +638,7 @@ textarea:focus {
 }
 
 .weekly-table thead th {
-  background: #ebe7e2;
+  background: #e8eef5;
   color: var(--muted);
   font-size: 0.74rem;
   font-weight: 900;
@@ -759,7 +759,7 @@ textarea:focus {
 }
 
 .progress-table thead th {
-  background: #ebe7e2;
+  background: #e8eef5;
   color: var(--muted);
   font-size: 0.74rem;
   font-weight: 900;
@@ -818,7 +818,7 @@ textarea:focus {
 
 .ghost-button {
   border-color: var(--line);
-  background: #f8ece8;
+  background: #edf3f8;
   color: var(--accent);
   padding: 0 18px;
 }
@@ -886,7 +886,7 @@ textarea:focus {
 .badge {
   align-self: start;
   border-radius: 999px;
-  background: rgba(215, 121, 104, 0.14);
+  background: rgba(95, 131, 168, 0.14);
   color: var(--accent);
   padding: 5px 10px;
   font-size: 0.75rem;
@@ -954,7 +954,7 @@ textarea:focus {
   gap: 8px;
   align-items: center;
   padding: 7px;
-  border: 1px solid rgba(90, 84, 76, 0.18);
+  border: 1px solid rgba(95, 131, 168, 0.18);
   border-radius: 16px;
   background: rgba(248, 251, 250, 0.94);
   box-shadow: 0 18px 45px rgba(24, 34, 51, 0.18);
@@ -976,7 +976,7 @@ textarea:focus {
 
 .bottom-nav a[aria-current="page"] {
   color: var(--ink);
-  background: #f8ece8;
+  background: #edf3f8;
 }
 
 @media (min-width: 900px) {
