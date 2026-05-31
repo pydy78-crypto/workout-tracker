@@ -1,20 +1,20 @@
 :root {
   color-scheme: light;
-  --bg: #f4f7f6;
-  --top: #e8f4f1;
-  --panel: #fbfcfc;
-  --panel-soft: #f1f6f4;
-  --ink: #18312f;
-  --muted: #647774;
-  --line: #d8e5e2;
-  --accent: #137c78;
-  --accent-strong: #0b625f;
-  --lime: #63b987;
-  --mint: #79c9bd;
+  --bg: #f5f4f2;
+  --top: #eeeae5;
+  --panel: #fbfaf8;
+  --panel-soft: #f1efec;
+  --ink: #353431;
+  --muted: #77736e;
+  --line: #dfdcd7;
+  --accent: #d77968;
+  --accent-strong: #bc604f;
+  --lime: #d77968;
+  --mint: #9b9389;
   --gold: #f5c04d;
   --purple: #bd79de;
-  --red: #d96559;
-  --shadow: 0 8px 24px rgba(24, 49, 47, 0.07);
+  --red: #b84f4a;
+  --shadow: 0 8px 24px rgba(53, 52, 49, 0.07);
 }
 
 * {
@@ -60,7 +60,7 @@ button {
   margin: 0 -18px;
   padding: 28px 36px 24px;
   background:
-    linear-gradient(180deg, #e8f4f1 0%, #fbfdfc 100%);
+    linear-gradient(180deg, #eeeae5 0%, #fbfaf8 100%);
 }
 
 .eyebrow {
@@ -122,9 +122,9 @@ h2 {
   align-content: center;
   gap: 7px;
   padding: 14px;
-  border: 1px solid rgba(19, 124, 120, 0.12);
+  border: 1px solid rgba(90, 84, 76, 0.12);
   border-radius: 8px;
-  background: #f7faf9;
+  background: #f4f1ed;
   box-shadow: 0 4px 14px rgba(23, 26, 47, 0.05);
 }
 
@@ -140,7 +140,7 @@ h2 {
 
 .panel {
   padding: 20px;
-  border: 1px solid rgba(19, 124, 120, 0.12);
+  border: 1px solid rgba(90, 84, 76, 0.12);
   border-radius: 8px;
   background: var(--panel);
   box-shadow: var(--shadow);
@@ -154,93 +154,18 @@ h2 {
 .progress-page-header {
   margin: -20px -20px 22px;
   padding: 20px;
-  border-bottom: 1px solid #d3e4e0;
-  background: #e5f1ef;
+  border-bottom: 1px solid #ded8d1;
+  background: #ece8e3;
 }
 
 .progress-page-header h1 {
   margin-bottom: 0;
-  color: #215b58;
+  color: #494640;
   font-size: clamp(2.35rem, 9vw, 3.55rem);
 }
 
 .progress-page-header .eyebrow {
-  color: #5f7d79;
-}
-
-.theme-picker-preview {
-  margin-bottom: 22px;
-}
-
-.theme-picker-preview h2 {
-  margin-bottom: 4px;
-}
-
-.theme-picker-preview > p {
-  margin-bottom: 12px;
-  color: var(--muted);
-}
-
-.theme-preview-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.theme-preview {
-  min-width: 0;
-  display: grid;
-  gap: 7px;
-  padding: 12px;
-  border: 1px solid;
-  border-radius: 8px;
-}
-
-.theme-preview span,
-.theme-preview small {
-  font-size: 0.74rem;
-  font-weight: 800;
-}
-
-.theme-preview strong {
-  font-size: 0.98rem;
-}
-
-.theme-preview i {
-  display: block;
-  width: 72%;
-  height: 8px;
-  border-radius: 999px;
-}
-
-.theme-preview-blue {
-  border-color: #cbd9e8;
-  background: #f4f7fb;
-  color: #304a65;
-}
-
-.theme-preview-blue i {
-  background: #5f83a8;
-}
-
-.theme-preview-plum {
-  border-color: #dfd1dc;
-  background: #faf6f9;
-  color: #684f65;
-}
-
-.theme-preview-plum i {
-  background: #a87896;
-}
-
-.theme-preview-charcoal {
-  border-color: #d8d6d2;
-  background: #f8f7f5;
-  color: #464541;
-}
-
-.theme-preview-charcoal i {
-  background: #d77968;
+  color: #7c766f;
 }
 
 .weekly-progress-section {
@@ -309,7 +234,7 @@ textarea {
   min-height: 42px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #f8fbfa;
+  background: #f7f4f1;
   color: var(--ink);
   padding: 11px 13px;
   outline: none;
@@ -341,7 +266,7 @@ input:focus,
 select:focus,
 textarea:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(19, 124, 120, 0.16);
+  box-shadow: 0 0 0 3px rgba(215, 121, 104, 0.18);
 }
 
 .exercise-list,
@@ -387,7 +312,7 @@ textarea:focus {
 }
 
 .daily-table thead th {
-  background: #eaf2f0;
+  background: #ebe7e2;
   color: var(--muted);
   font-size: 0.74rem;
   font-weight: 900;
@@ -430,7 +355,7 @@ textarea:focus {
   padding: 14px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #f9fbfa;
+  background: #f8f6f3;
 }
 
 .weekly-option h3 {
@@ -588,7 +513,7 @@ textarea:focus {
   padding: 16px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #f9fbfa;
+  background: #f8f6f3;
 }
 
 .monthly-calendar-header {
@@ -625,8 +550,8 @@ textarea:focus {
 }
 
 .week-card.is-complete {
-  border-color: rgba(19, 124, 120, 0.28);
-  background: #edf8f6;
+  border-color: rgba(215, 121, 104, 0.3);
+  background: #f8ece8;
 }
 
 .week-card strong {
@@ -713,7 +638,7 @@ textarea:focus {
 }
 
 .weekly-table thead th {
-  background: #eaf2f0;
+  background: #ebe7e2;
   color: var(--muted);
   font-size: 0.74rem;
   font-weight: 900;
@@ -759,7 +684,7 @@ textarea:focus {
 .chart-empty {
   border: 1px solid var(--line);
   border-radius: 0 0 8px 8px;
-  background: #f9fbfa;
+  background: #f8f6f3;
 }
 
 .chart-wrap {
@@ -834,7 +759,7 @@ textarea:focus {
 }
 
 .progress-table thead th {
-  background: #eaf2f0;
+  background: #ebe7e2;
   color: var(--muted);
   font-size: 0.74rem;
   font-weight: 900;
@@ -893,7 +818,7 @@ textarea:focus {
 
 .ghost-button {
   border-color: var(--line);
-  background: #edf8f6;
+  background: #f8ece8;
   color: var(--accent);
   padding: 0 18px;
 }
@@ -961,7 +886,7 @@ textarea:focus {
 .badge {
   align-self: start;
   border-radius: 999px;
-  background: rgba(19, 124, 120, 0.12);
+  background: rgba(215, 121, 104, 0.14);
   color: var(--accent);
   padding: 5px 10px;
   font-size: 0.75rem;
@@ -1029,7 +954,7 @@ textarea:focus {
   gap: 8px;
   align-items: center;
   padding: 7px;
-  border: 1px solid rgba(19, 124, 120, 0.18);
+  border: 1px solid rgba(90, 84, 76, 0.18);
   border-radius: 16px;
   background: rgba(248, 251, 250, 0.94);
   box-shadow: 0 18px 45px rgba(24, 34, 51, 0.18);
@@ -1051,7 +976,7 @@ textarea:focus {
 
 .bottom-nav a[aria-current="page"] {
   color: var(--ink);
-  background: #edf8f6;
+  background: #f8ece8;
 }
 
 @media (min-width: 900px) {
@@ -1089,10 +1014,6 @@ textarea:focus {
   .progress-page-header {
     margin: -15px -15px 20px;
     padding: 16px 15px;
-  }
-
-  .theme-preview-grid {
-    grid-template-columns: 1fr;
   }
 
   .panel-header {
