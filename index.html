@@ -87,11 +87,16 @@
               Date
               <input id="workout-date" type="date" required>
             </label>
+            <label>
+              Copy from date
+              <input id="copy-source-date" type="date">
+            </label>
           </div>
 
           <div id="exercise-list" class="exercise-list" aria-live="polite"></div>
 
           <div class="form-actions">
+            <button class="ghost-button" id="copy-workout" type="button">Copy Previous</button>
             <button class="ghost-button" id="clear-form" type="button">Clear</button>
             <button class="primary-button" id="save-workout" type="submit">Save Workout</button>
           </div>
@@ -198,6 +203,6 @@
       </article>
     </template>
 
-    <script src="app.js?v=73"></script>
+    <script src="app.js?v=75"></script>
   </body>
 </html>

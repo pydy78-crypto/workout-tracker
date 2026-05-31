@@ -2,11 +2,13 @@ const STORAGE_KEY = "workout-tracker.sessions";
 
 const form = document.querySelector("#workout-form");
 const dateInput = document.querySelector("#workout-date");
+const copySourceDateInput = document.querySelector("#copy-source-date");
 const exerciseList = document.querySelector("#exercise-list");
 const exerciseTemplate = document.querySelector("#exercise-template");
 const formTitle = document.querySelector("#form-title");
 const saveWorkoutButton = document.querySelector("#save-workout");
 const addExerciseButton = document.querySelector("#add-exercise");
+const copyWorkoutButton = document.querySelector("#copy-workout");
 const clearFormButton = document.querySelector("#clear-form");
 const clearHistoryButton = document.querySelector("#clear-history");
 const exportHistoryButton = document.querySelector("#export-history");
@@ -239,6 +241,7 @@ function resetForm() {
   formTitle.textContent = "New Workout";
   saveWorkoutButton.textContent = "Save Workout";
   dateInput.value = todayISO();
+  copySourceDateInput.value = getDefaultCopySourceDate(dateInput.value);
   exerciseList.replaceChildren();
   addExercise();
 }
@@ -372,7 +375,6 @@ function renderHistory() {
           <div class="history-actions">
             <span class="badge">${escapeHTML(session.focus)}</span>
             <button class="text-action-button" type="button" data-edit-session="${escapeHTML(session.id)}">Edit</button>
-            <button class="text-action-button" type="button" data-copy-session="${escapeHTML(session.id)}">Copy</button>
             <button class="text-danger-button" type="button" data-delete-session="${escapeHTML(session.id)}">Delete</button>
           </div>
         </div>
@@ -383,10 +385,6 @@ function renderHistory() {
         event.stopPropagation();
         loadSessionForEdit(session.id);
       });
-      card.querySelector("[data-copy-session]").addEventListener("click", (event) => {
-        event.stopPropagation();
-        copySessionToDate(session.id);
-      });
       card.querySelector("[data-delete-session]").addEventListener("click", (event) => {
         event.stopPropagation();
         deleteSession(session.id);
@@ -396,36 +394,36 @@ function renderHistory() {
     });
 }
 
-function copySessionToDate(sessionId) {
-  const session = sessions.find((item) => item.id === sessionId);
+function copyWorkoutToForm() {
+  const destinationDate = dateInput.value || todayISO();
+  const sourceDate = toISODate(copySourceDateInput.value);
+
+  if (!sourceDate) {
+    importStatus.textContent = "Choose a saved workout date to copy.";
+    return;
+  }
+
+  const session = sessions.find((item) => toISODate(item.date) === sourceDate);
 
   if (!session) {
-    importStatus.textContent = "Could not find that workout to copy.";
+    importStatus.textContent = `No saved workout found for ${formatDate(sourceDate)}.`;
     return;
   }
 
-  const destination = prompt(`Copy ${formatDate(session.date)} workout to date (YYYY-MM-DD):`, todayISO());
-  const destinationDate = toISODate(destination);
+  editingSessionId = "";
+  formTitle.textContent = "New Workout";
+  saveWorkoutButton.textContent = "Save Workout";
+  dateInput.value = destinationDate;
+  exerciseList.replaceChildren();
+  session.exercises.forEach((exercise) => addExercise({ ...exercise }));
+  importStatus.textContent = `Copied ${formatDate(sourceDate)} into the ${formatDate(destinationDate)} form. Review and save when ready.`;
+}
 
-  if (!destination) {
-    return;
-  }
-
-  if (!destinationDate) {
-    importStatus.textContent = "Enter a valid date, such as 2026-05-31.";
-    return;
-  }
-
-  mergeSessionByDate({
-    id: crypto.randomUUID(),
-    date: destinationDate,
-    focus: session.focus,
-    notes: session.notes,
-    exercises: session.exercises.map((exercise) => ({ ...exercise }))
-  });
-  saveSessions();
-  render();
-  importStatus.textContent = `Copied ${formatDate(session.date)} workout to ${formatDate(destinationDate)}.`;
+function getDefaultCopySourceDate(destinationDate) {
+  return sessions
+    .map((session) => toISODate(session.date))
+    .filter((date) => date && date !== destinationDate)
+    .sort((a, b) => b.localeCompare(a))[0] || "";
 }
 
 function getWeekRange(date = new Date()) {
@@ -1581,6 +1579,7 @@ function exportSessions() {
 }
 
 addExerciseButton.addEventListener("click", () => addExercise());
+copyWorkoutButton.addEventListener("click", copyWorkoutToForm);
 tabTargets.forEach((target) => {
   target.addEventListener("click", (event) => {
     event.preventDefault();
