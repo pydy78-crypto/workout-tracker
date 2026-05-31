@@ -583,11 +583,6 @@ function renderWeeklyProgress() {
     .sort((a, b) => b.sets - a.sets || a.name.localeCompare(b.name));
   const totalSets = equipmentRows.reduce((total, row) => total + row.sets, 0);
   const weekLabel = `${start.toLocaleDateString(undefined, { month: "numeric", day: "numeric" })} - ${end.toLocaleDateString(undefined, { month: "numeric", day: "numeric" })}`;
-  const daysLabel = dayCards
-    .filter((day) => day.names.length)
-    .map((day) => day.weekday)
-    .join(", ") || "No gym days yet";
-
   weeklyProgress.innerHTML = `
     <article class="weekly-option weekly-feature">
       <h3>Week Range by Date</h3>
@@ -605,7 +600,6 @@ function renderWeeklyProgress() {
           <strong>${totalSets}</strong>
         </div>
       </div>
-      <p class="weekly-days-line">Days: ${escapeHTML(daysLabel)}</p>
       <div>
         <p class="weekly-subtitle">${escapeHTML(weekLabel)}</p>
         ${renderThisWeekChart(dayCards)}
@@ -765,7 +759,6 @@ function renderEquipmentGraph(monthSessions, equipmentProgress) {
     <div class="graph-header">
       <div>
         <h3>Progress Graph</h3>
-        <p>Weight trend by equipment</p>
       </div>
       <label>
         Equipment
