@@ -96,19 +96,6 @@ h1 {
   margin-bottom: 0;
 }
 
-.today-add-button {
-  width: 54px;
-  height: 54px;
-  display: grid;
-  place-items: center;
-  border: 0;
-  border-radius: 999px;
-  background: var(--accent);
-  color: #ffffff;
-  font-size: 2rem;
-  line-height: 1;
-}
-
 h2 {
   margin-bottom: 6px;
   font-size: 1.55rem;

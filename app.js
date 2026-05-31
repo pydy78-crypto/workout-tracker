@@ -7,7 +7,6 @@ const exerciseTemplate = document.querySelector("#exercise-template");
 const formTitle = document.querySelector("#form-title");
 const saveWorkoutButton = document.querySelector("#save-workout");
 const addExerciseButton = document.querySelector("#add-exercise");
-const quickAddButton = document.querySelector("#quick-add");
 const clearFormButton = document.querySelector("#clear-form");
 const clearHistoryButton = document.querySelector("#clear-history");
 const exportHistoryButton = document.querySelector("#export-history");
@@ -714,12 +713,12 @@ function renderEquipmentGraph(monthSessions, equipmentProgress) {
         </select>
       </label>
     </div>
-    ${renderWeightChart(chartPoints)}
+    ${renderWeightChart(chartPoints, selectedEquipment)}
   `;
   equipmentGraph.querySelector("#graph-equipment").addEventListener("change", renderMonthlyProgress);
 }
 
-function renderWeightChart(points) {
+function renderWeightChart(points, equipment) {
   if (!points.length) {
     return `<div class="chart-empty">No weight data yet.</div>`;
   }
@@ -728,7 +727,7 @@ function renderWeightChart(points) {
   const height = 260;
   const padding = 42;
   const tickSize = 5;
-  const chartMax = 100;
+  const chartMax = equipment === "Hammer Strength Iso-Lateral Leg Press" ? 100 : 60;
   const ticks = Array.from({ length: Math.round(chartMax / tickSize) + 1 }, (_, index) => index * tickSize);
   const xStep = points.length > 1 ? (width - padding * 2) / (points.length - 1) : 0;
   const coordinates = points.map((point, index) => {
@@ -1536,10 +1535,6 @@ function exportSessions() {
 }
 
 addExerciseButton.addEventListener("click", () => addExercise());
-quickAddButton.addEventListener("click", () => {
-  setActiveTab("today");
-  form.scrollIntoView({ behavior: "smooth", block: "start" });
-});
 tabTargets.forEach((target) => {
   target.addEventListener("click", (event) => {
     event.preventDefault();

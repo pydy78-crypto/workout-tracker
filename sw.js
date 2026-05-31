@@ -1,9 +1,9 @@
-const CACHE_NAME = "workout-tracker-v59";
+const CACHE_NAME = "workout-tracker-v60";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./styles.css?v=26",
-  "./app.js?v=59",
+  "./app.js?v=60",
   "./manifest.webmanifest",
   "./icon.svg"
 ];
