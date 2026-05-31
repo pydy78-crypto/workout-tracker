@@ -1,20 +1,20 @@
 :root {
   color-scheme: light;
-  --bg: #f3f5fb;
-  --top: #eef0ff;
+  --bg: #f4f7f6;
+  --top: #e8f4f1;
   --panel: #ffffff;
-  --panel-soft: #f7f8fc;
-  --ink: #171a2f;
-  --muted: #63687a;
-  --line: #e1e5ef;
-  --accent: #4c58ff;
-  --accent-strong: #333ed8;
-  --lime: #a7e957;
-  --mint: #70d6c6;
+  --panel-soft: #f7faf9;
+  --ink: #18312f;
+  --muted: #647774;
+  --line: #dce9e6;
+  --accent: #137c78;
+  --accent-strong: #0b625f;
+  --lime: #63b987;
+  --mint: #79c9bd;
   --gold: #f5c04d;
   --purple: #bd79de;
-  --red: #d64f5d;
-  --shadow: 0 8px 24px rgba(23, 26, 47, 0.07);
+  --red: #d96559;
+  --shadow: 0 8px 24px rgba(24, 49, 47, 0.07);
 }
 
 * {
@@ -60,7 +60,7 @@ button {
   margin: 0 -18px;
   padding: 28px 36px 24px;
   background:
-    linear-gradient(180deg, #eef0ff 0%, #f9faff 100%);
+    linear-gradient(180deg, #e8f4f1 0%, #fbfdfc 100%);
 }
 
 .eyebrow {
@@ -122,7 +122,7 @@ h2 {
   align-content: center;
   gap: 7px;
   padding: 14px;
-  border: 1px solid rgba(76, 88, 255, 0.12);
+  border: 1px solid rgba(19, 124, 120, 0.12);
   border-radius: 8px;
   background: var(--panel);
   box-shadow: 0 4px 14px rgba(23, 26, 47, 0.05);
@@ -140,7 +140,7 @@ h2 {
 
 .panel {
   padding: 20px;
-  border: 1px solid rgba(76, 88, 255, 0.12);
+  border: 1px solid rgba(19, 124, 120, 0.12);
   border-radius: 8px;
   background: var(--panel);
   box-shadow: var(--shadow);
@@ -258,7 +258,7 @@ input:focus,
 select:focus,
 textarea:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(118, 168, 255, 0.18);
+  box-shadow: 0 0 0 3px rgba(19, 124, 120, 0.16);
 }
 
 .exercise-list,
@@ -410,7 +410,7 @@ textarea:focus {
 }
 
 .weekly-trend-area {
-  fill: rgba(167, 233, 87, 0.28);
+  fill: rgba(99, 185, 135, 0.24);
 }
 
 .weekly-trend-line {
@@ -541,8 +541,8 @@ textarea:focus {
 }
 
 .week-card.is-complete {
-  border-color: rgba(76, 88, 255, 0.3);
-  background: #eef0ff;
+  border-color: rgba(19, 124, 120, 0.28);
+  background: #edf8f6;
 }
 
 .week-card strong {
@@ -806,7 +806,7 @@ textarea:focus {
 
 .ghost-button {
   border-color: var(--line);
-  background: #eef0ff;
+  background: #edf8f6;
   color: var(--accent);
   padding: 0 18px;
 }
@@ -874,7 +874,7 @@ textarea:focus {
 .badge {
   align-self: start;
   border-radius: 999px;
-  background: rgba(76, 88, 255, 0.12);
+  background: rgba(19, 124, 120, 0.12);
   color: var(--accent);
   padding: 5px 10px;
   font-size: 0.75rem;
@@ -942,7 +942,7 @@ textarea:focus {
   gap: 8px;
   align-items: center;
   padding: 7px;
-  border: 1px solid rgba(76, 88, 255, 0.18);
+  border: 1px solid rgba(19, 124, 120, 0.18);
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.9);
   box-shadow: 0 18px 45px rgba(24, 34, 51, 0.18);
@@ -964,7 +964,7 @@ textarea:focus {
 
 .bottom-nav a[aria-current="page"] {
   color: var(--ink);
-  background: #eef0ff;
+  background: #edf8f6;
 }
 
 @media (min-width: 900px) {
