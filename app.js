@@ -21,6 +21,7 @@ const todayDateLabel = document.querySelector("#today-date-label");
 const dailyTableBody = document.querySelector("#daily-table-body");
 const dailyTableWrap = document.querySelector("#daily-table-wrap");
 const dailyTableEmpty = document.querySelector("#daily-table-empty");
+const dailyTablePanel = document.querySelector("[data-daily-table-panel]");
 const progressMonthInput = document.querySelector("#progress-month");
 const reviewWeekDateInput = document.querySelector("#review-week-date");
 const previousWeekButton = document.querySelector("#previous-week");
@@ -907,6 +908,10 @@ function setActiveTab(tabName) {
 
   if (formPanel) {
     formPanel.hidden = tabName === "diary";
+  }
+
+  if (dailyTablePanel) {
+    dailyTablePanel.hidden = tabName === "diary";
   }
 
   if (diaryPanel) {
