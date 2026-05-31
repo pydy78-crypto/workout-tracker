@@ -1613,5 +1613,7 @@ render();
 setActiveTab(window.location.hash === "#progress" ? "progress" : window.location.hash === "#diary" ? "diary" : "today");
 
 if ("serviceWorker" in navigator && window.location.protocol !== "file:") {
-  navigator.serviceWorker.register("./sw.js");
+  navigator.serviceWorker.register("./sw.js", { updateViaCache: "none" }).then((registration) => {
+    registration.update();
+  });
 }
