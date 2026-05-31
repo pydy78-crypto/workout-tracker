@@ -1539,7 +1539,6 @@ addExerciseButton.addEventListener("click", () => addExercise());
 quickAddButton.addEventListener("click", () => {
   setActiveTab("today");
   form.scrollIntoView({ behavior: "smooth", block: "start" });
-  addExercise();
 });
 tabTargets.forEach((target) => {
   target.addEventListener("click", (event) => {

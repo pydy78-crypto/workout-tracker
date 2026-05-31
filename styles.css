@@ -86,6 +86,29 @@ h1 {
   letter-spacing: 0;
 }
 
+.today-title-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.today-title-row h1 {
+  margin-bottom: 0;
+}
+
+.today-add-button {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 2rem;
+  line-height: 1;
+}
+
 h2 {
   margin-bottom: 6px;
   font-size: 1.55rem;
@@ -137,7 +160,16 @@ h2 {
 }
 
 .progress-panel {
-  margin-top: -8px;
+  margin-top: 24px;
+}
+
+.progress-page-header {
+  margin-bottom: 22px;
+}
+
+.progress-page-header h1 {
+  margin-bottom: 0;
+  font-size: clamp(2.6rem, 10vw, 4rem);
 }
 
 .weekly-progress-section {
@@ -894,7 +926,7 @@ textarea:focus {
   width: min(620px, calc(100% - 32px));
   transform: translateX(-50%);
   display: grid;
-  grid-template-columns: repeat(3, 1fr) 76px;
+  grid-template-columns: repeat(3, 1fr);
   gap: 8px;
   align-items: center;
   padding: 10px;
@@ -921,14 +953,6 @@ textarea:focus {
 .bottom-nav a[aria-current="page"] {
   color: var(--ink);
   background: #eef0ff;
-}
-
-.bottom-nav button {
-  border-radius: 999px;
-  background: var(--accent);
-  color: #ffffff;
-  font-size: 2rem;
-  line-height: 1;
 }
 
 @media (min-width: 900px) {
@@ -991,6 +1015,27 @@ textarea:focus {
   .form-grid,
   .set-grid {
     grid-template-columns: 1fr;
+  }
+
+  .daily-table,
+  .weekly-table,
+  .progress-table {
+    min-width: 0;
+    font-size: 0.76rem;
+  }
+
+  .daily-table th,
+  .daily-table td,
+  .weekly-table th,
+  .weekly-table td,
+  .progress-table th,
+  .progress-table td {
+    padding: 10px 7px;
+  }
+
+  .progress-table th:last-child,
+  .progress-table td:last-child {
+    display: none;
   }
 
   .form-actions,

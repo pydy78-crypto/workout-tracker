@@ -11,14 +11,17 @@
     <link rel="manifest" href="manifest.webmanifest">
     <link rel="icon" href="icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="icon.svg">
-    <link rel="stylesheet" href="styles.css?v=25">
+    <link rel="stylesheet" href="styles.css?v=26">
   </head>
   <body>
     <main class="app-shell">
       <section class="header-band">
         <div>
           <p class="eyebrow">Workout Tracker</p>
-          <h1>Today</h1>
+          <div class="today-title-row">
+            <h1>Today</h1>
+            <button class="today-add-button" id="quick-add" type="button" aria-label="Add workout" title="Add workout">+</button>
+          </div>
         </div>
         <div class="stats-grid" aria-label="Workout summary">
           <div class="stat">
@@ -29,6 +32,10 @@
       </section>
 
       <section class="panel progress-panel" data-tab-panel="progress" hidden>
+        <header class="progress-page-header">
+          <p class="eyebrow">Workout Tracker</p>
+          <h1>Progress</h1>
+        </header>
         <div class="weekly-progress-section">
           <div class="panel-header">
             <div>
@@ -153,7 +160,6 @@
         <a href="#today" data-tab-target="today" aria-current="page">Today</a>
         <a href="#progress" data-tab-target="progress">Progress</a>
         <a href="#diary" data-tab-target="diary">Diary</a>
-        <button id="quick-add" type="button" aria-label="Add exercise">+</button>
       </nav>
     </main>
 
@@ -199,6 +205,6 @@
       </article>
     </template>
 
-    <script src="app.js?v=58"></script>
+    <script src="app.js?v=59"></script>
   </body>
 </html>
