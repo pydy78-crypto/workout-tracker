@@ -1,12 +1,12 @@
 :root {
   color-scheme: light;
-  --bg: #f6f7ff;
+  --bg: #f3f5fb;
   --top: #eef0ff;
   --panel: #ffffff;
-  --panel-soft: #f8f9ff;
+  --panel-soft: #f7f8fc;
   --ink: #171a2f;
   --muted: #63687a;
-  --line: #dfe3f2;
+  --line: #e1e5ef;
   --accent: #4c58ff;
   --accent-strong: #333ed8;
   --lime: #a7e957;
@@ -14,7 +14,7 @@
   --gold: #f5c04d;
   --purple: #bd79de;
   --red: #d64f5d;
-  --shadow: 0 18px 44px rgba(23, 26, 47, 0.1);
+  --shadow: 0 8px 24px rgba(23, 26, 47, 0.07);
 }
 
 * {
@@ -49,16 +49,16 @@ button {
 }
 
 .app-shell {
-  width: min(960px, 100%);
+  width: min(860px, 100%);
   margin: 0 auto;
   padding: 0 18px 112px;
 }
 
 .header-band {
   display: grid;
-  gap: 24px;
+  gap: 18px;
   margin: 0 -18px;
-  padding: 38px 36px 30px;
+  padding: 28px 36px 24px;
   background:
     linear-gradient(180deg, #eef0ff 0%, #f9faff 100%);
 }
@@ -81,7 +81,7 @@ p {
 
 h1 {
   margin-bottom: 10px;
-  font-size: clamp(3rem, 12vw, 4.8rem);
+  font-size: clamp(2.8rem, 11vw, 4.3rem);
   line-height: 0.95;
   letter-spacing: 0;
 }
@@ -117,15 +117,15 @@ h2 {
 }
 
 .stat {
-  min-height: 92px;
+  min-height: 78px;
   display: grid;
   align-content: center;
   gap: 7px;
-  padding: 16px;
+  padding: 14px;
   border: 1px solid rgba(76, 88, 255, 0.12);
-  border-radius: 18px;
+  border-radius: 8px;
   background: var(--panel);
-  box-shadow: var(--shadow);
+  box-shadow: 0 4px 14px rgba(23, 26, 47, 0.05);
 }
 
 .stat span {
@@ -139,9 +139,9 @@ h2 {
 }
 
 .panel {
-  padding: 22px;
+  padding: 20px;
   border: 1px solid rgba(76, 88, 255, 0.12);
-  border-radius: 22px;
+  border-radius: 8px;
   background: var(--panel);
   box-shadow: var(--shadow);
 }
@@ -223,9 +223,9 @@ input,
 select,
 textarea {
   width: 100%;
-  min-height: 46px;
+  min-height: 42px;
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 8px;
   background: #ffffff;
   color: var(--ink);
   padding: 11px 13px;
@@ -276,16 +276,16 @@ textarea:focus {
 .exercise-card,
 .history-card,
 .paste-import {
-  padding: 16px;
+  padding: 14px;
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: 8px;
   background: var(--panel-soft);
 }
 
 .daily-table-wrap {
   overflow-x: auto;
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: 8px;
   background: var(--panel-soft);
 }
 
@@ -343,9 +343,9 @@ textarea:focus {
   max-width: 100%;
   display: grid;
   gap: 12px;
-  padding: 16px;
+  padding: 14px;
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: 8px;
   background: #ffffff;
 }
 
@@ -354,7 +354,7 @@ textarea:focus {
 }
 
 .weekly-feature {
-  gap: 18px;
+  gap: 14px;
 }
 
 .weekly-days-line {
@@ -437,6 +437,21 @@ textarea:focus {
   font-weight: 800;
 }
 
+.weekly-chart-empty {
+  display: grid;
+  gap: 5px;
+  padding: 16px;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  background: var(--panel-soft);
+}
+
+.weekly-chart-empty span {
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
 .weekly-month-card {
   display: grid;
   gap: 18px;
@@ -488,7 +503,7 @@ textarea:focus {
   margin-bottom: 14px;
   padding: 16px;
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: 8px;
   background: #ffffff;
 }
 
@@ -521,7 +536,7 @@ textarea:focus {
   gap: 5px;
   padding: 14px;
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: 8px;
   background: var(--panel-soft);
 }
 
@@ -634,10 +649,10 @@ textarea:focus {
   align-items: end;
   justify-content: space-between;
   gap: 16px;
-  padding: 16px;
+  padding: 14px;
   border: 1px solid var(--line);
   border-bottom: 0;
-  border-radius: 18px 18px 0 0;
+  border-radius: 8px 8px 0 0;
   background: var(--panel-soft);
 }
 
@@ -657,7 +672,7 @@ textarea:focus {
 .chart-wrap,
 .chart-empty {
   border: 1px solid var(--line);
-  border-radius: 0 0 18px 18px;
+  border-radius: 0 0 8px 8px;
   background: #ffffff;
 }
 
@@ -714,7 +729,7 @@ textarea:focus {
 .progress-table-wrap {
   overflow-x: auto;
   border: 1px solid var(--line);
-  border-radius: 18px;
+  border-radius: 8px;
   background: var(--panel-soft);
 }
 
@@ -767,8 +782,8 @@ textarea:focus {
 .icon-button,
 .primary-button,
 .ghost-button {
-  min-height: 44px;
-  border-radius: 18px;
+  min-height: 42px;
+  border-radius: 8px;
   border: 1px solid transparent;
   font-weight: 900;
 }
@@ -838,9 +853,9 @@ textarea:focus {
 .empty-state {
   display: grid;
   gap: 6px;
-  padding: 24px;
+  padding: 18px;
   border: 1px dashed var(--line);
-  border-radius: 18px;
+  border-radius: 8px;
   color: var(--muted);
   text-align: center;
 }
@@ -918,17 +933,17 @@ textarea:focus {
 .bottom-nav {
   position: fixed;
   left: 50%;
-  bottom: 18px;
+  bottom: max(12px, env(safe-area-inset-bottom));
   z-index: 10;
-  width: min(620px, calc(100% - 32px));
+  width: min(560px, calc(100% - 24px));
   transform: translateX(-50%);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
   align-items: center;
-  padding: 10px;
+  padding: 7px;
   border: 1px solid rgba(76, 88, 255, 0.18);
-  border-radius: 28px;
+  border-radius: 16px;
   background: rgba(255, 255, 255, 0.9);
   box-shadow: 0 18px 45px rgba(24, 34, 51, 0.18);
   backdrop-filter: blur(18px);
@@ -936,9 +951,9 @@ textarea:focus {
 
 .bottom-nav a,
 .bottom-nav button {
-  min-height: 54px;
+  min-height: 46px;
   border: 0;
-  border-radius: 20px;
+  border-radius: 10px;
   display: grid;
   place-items: center;
   color: var(--muted);
@@ -972,16 +987,16 @@ textarea:focus {
 
 @media (max-width: 560px) {
   .app-shell {
-    padding-inline: 14px;
+    padding-inline: 12px;
   }
 
   .header-band {
-    margin-inline: -14px;
-    padding: 34px 24px 28px;
+    margin-inline: -12px;
+    padding: 24px 18px 20px;
   }
 
   .panel {
-    padding: 18px;
+    padding: 15px;
   }
 
   .panel-header {
@@ -1021,12 +1036,12 @@ textarea:focus {
   }
 
   .stat {
-    min-height: 82px;
-    padding: 13px;
+    min-height: 70px;
+    padding: 11px;
   }
 
   .stat small {
-    font-size: 0.74rem;
+    font-size: 0.7rem;
   }
 
   .exercise-card {
@@ -1035,7 +1050,7 @@ textarea:focus {
 
   .set-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 9px;
+    gap: 7px;
   }
 
   .set-grid > label:first-child {
@@ -1045,8 +1060,8 @@ textarea:focus {
 
   .set-grid .remove-exercise {
     position: absolute;
-    top: 16px;
-    right: 16px;
+    top: 14px;
+    right: 14px;
   }
 
   .weekly-trend svg,
@@ -1068,6 +1083,18 @@ textarea:focus {
   .progress-table th,
   .progress-table td {
     padding: 10px 7px;
+  }
+
+  .weekly-option {
+    padding: 12px;
+  }
+
+  .weekly-metrics strong {
+    font-size: 1.7rem;
+  }
+
+  .bottom-nav {
+    gap: 4px;
   }
 
   .progress-table th:last-child,

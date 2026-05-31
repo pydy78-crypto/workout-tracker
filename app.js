@@ -414,6 +414,15 @@ function addDays(date, days) {
 }
 
 function renderThisWeekChart(days) {
+  if (!days.some((day) => day.sets > 0)) {
+    return `
+      <div class="weekly-chart-empty">
+        <strong>No sets logged this week</strong>
+        <span>Your weekly trend will appear after your first workout.</span>
+      </div>
+    `;
+  }
+
   const width = 640;
   const height = 190;
   const padding = 20;
