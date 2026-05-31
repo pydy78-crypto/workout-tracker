@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f6f7ff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Workout">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Workout Tracker</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="icon.svg">
+    <link rel="stylesheet" href="styles.css?v=25">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="header-band">
+        <div>
+          <p class="eyebrow">Workout Tracker</p>
+          <h1>Today</h1>
+        </div>
+        <div class="stats-grid" aria-label="Workout summary">
+          <div class="stat">
+            <span id="stat-workouts">0</span>
+            <small>Equipment Used Today</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel progress-panel" data-tab-panel="progress" hidden>
+        <div class="weekly-progress-section">
+          <div class="panel-header">
+            <div>
+              <h2>Weekly Progress</h2>
+              <p>This week’s gym days and equipment.</p>
+            </div>
+          </div>
+          <div class="progress-summary" aria-label="Weekly progress summary">
+            <div class="stat">
+              <span id="week-workouts">0</span>
+              <small>Gym Days This Week</small>
+            </div>
+            <div class="stat">
+              <span id="week-equipment">0</span>
+              <small>Equipment This Week</small>
+            </div>
+          </div>
+          <div id="weekly-progress" class="weekly-progress"></div>
+        </div>
+
+        <div class="panel-header">
+          <div>
+            <h2>Monthly Progress</h2>
+            <p>See workout count, total work, and progress by equipment for the month.</p>
+          </div>
+          <label class="month-picker">
+            Month
+            <input id="progress-month" type="month">
+          </label>
+        </div>
+        <div class="progress-summary" aria-label="Monthly progress summary">
+          <div class="stat">
+            <span id="month-workouts">0</span>
+            <small>Gym Days</small>
+          </div>
+        </div>
+        <div id="progress-empty" class="empty-state">
+          <strong>No workouts for this month</strong>
+          <span>Record or import a session to start seeing progress.</span>
+        </div>
+        <div id="exercise-progress" class="exercise-progress"></div>
+        <div id="equipment-graph" class="equipment-graph"></div>
+      </section>
+
+      <section class="workspace" data-tab-panel="today">
+        <form id="workout-form" class="panel" autocomplete="off" data-form-panel>
+          <div class="panel-header">
+            <div>
+              <h2 id="form-title">New Workout</h2>
+            </div>
+            <button class="icon-button" id="add-exercise" type="button" aria-label="Add exercise" title="Add exercise">+</button>
+          </div>
+
+          <div class="form-grid">
+            <label>
+              Date
+              <input id="workout-date" type="date" required>
+            </label>
+          </div>
+
+          <div id="exercise-list" class="exercise-list" aria-live="polite"></div>
+
+          <div class="form-actions">
+            <button class="ghost-button" id="clear-form" type="button">Clear</button>
+            <button class="primary-button" id="save-workout" type="submit">Save Workout</button>
+          </div>
+        </form>
+
+        <section class="panel daily-table-panel">
+          <div class="panel-header">
+            <div>
+              <h2>Daily Table</h2>
+              <p><span id="today-date-label"></span></p>
+            </div>
+          </div>
+          <div id="daily-table-empty" class="empty-state">
+            <strong>No workout logged today</strong>
+            <span>Save a workout to fill today’s table.</span>
+          </div>
+          <div id="daily-table-wrap" class="daily-table-wrap" hidden>
+            <table class="daily-table">
+              <thead>
+                <tr>
+                  <th scope="col">Equipment</th>
+                  <th scope="col">Sets</th>
+                  <th scope="col">Reps</th>
+                  <th scope="col">Weight</th>
+                </tr>
+              </thead>
+              <tbody id="daily-table-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel history-panel" data-diary-panel>
+          <div class="panel-header">
+            <div>
+              <h2>Recent Sessions</h2>
+              <p>Your workouts are saved in this browser.</p>
+            </div>
+            <div class="data-actions">
+              <button class="ghost-button" id="export-history" type="button">Export</button>
+              <button class="ghost-button danger" id="clear-history" type="button">Reset</button>
+            </div>
+          </div>
+          <p id="import-status" class="import-status" role="status" aria-live="polite"></p>
+          <div class="paste-import">
+            <label for="paste-data">
+              Paste Workout Data
+              <textarea id="paste-data" rows="5" placeholder="Hammer Strength MTS Incline Press&#10;5/28 - 15 lb, 10 rep / 4 sets&#10;5/29 - 15 lb, 10 rep / 4 sets"></textarea>
+            </label>
+            <button class="primary-button" id="import-paste" type="button">Import Pasted Data</button>
+          </div>
+          <div id="empty-state" class="empty-state">
+            <strong>No workouts yet</strong>
+            <span>Add your first session to start building the week.</span>
+          </div>
+          <div id="workout-history" class="workout-history"></div>
+        </section>
+      </section>
+      <nav class="bottom-nav" aria-label="Primary">
+        <a href="#today" data-tab-target="today" aria-current="page">Today</a>
+        <a href="#progress" data-tab-target="progress">Progress</a>
+        <a href="#diary" data-tab-target="diary">Diary</a>
+        <button id="quick-add" type="button" aria-label="Add exercise">+</button>
+      </nav>
+    </main>
+
+    <template id="exercise-template">
+      <article class="exercise-card">
+        <div class="set-grid">
+          <label>
+            Equipment
+            <select class="exercise-equipment" required>
+              <option value="Hammer Strength MTS Incline Press">Hammer Strength MTS Incline Press</option>
+              <option value="Hammer Strength MTS High Row">Hammer Strength MTS High Row</option>
+              <option value="Hammer Strength MTS Row">Hammer Strength MTS Row</option>
+              <option value="Hammer Strength Seated Calf machine">Hammer Strength Seated Calf machine</option>
+              <option value="Back Extension">Back Extension</option>
+              <option value="Seated Cable Row station">Seated Cable Row station</option>
+              <option value="Captain's Chair">Captain's Chair</option>
+              <option value="Seated Leg Curl">Seated Leg Curl</option>
+              <option value="Hammer Strength MTS Kneeling Leg Curl">Hammer Strength MTS Kneeling Leg Curl</option>
+              <option value="HIP ABDUCTION">HIP ABDUCTION</option>
+              <option value="HIP ADDUCTION">HIP ADDUCTION</option>
+              <option value="Leg Extension">Leg Extension</option>
+              <option value="Hammer Strength Iso-Lateral Leg Press">Hammer Strength Iso-Lateral Leg Press</option>
+              <option value="Lat Pulldown">Lat Pulldown</option>
+              <option value="Plank">Plank</option>
+              <option value="Side Plank">Side Plank</option>
+            </select>
+          </label>
+          <label>
+            Sets
+            <input class="exercise-sets" type="number" min="1" step="1" value="4" required>
+          </label>
+          <label>
+            Reps
+            <input class="exercise-reps" type="number" min="1" step="1" value="10" required>
+          </label>
+          <label class="weight-field">
+            Weight
+            <input class="exercise-weight" type="number" min="0" step="0.5" value="0" required>
+            <span class="unit-label">lb</span>
+          </label>
+          <button class="icon-button remove-exercise" type="button" aria-label="Remove equipment" title="Remove equipment">×</button>
+        </div>
+      </article>
+    </template>
+
+    <script src="app.js?v=58"></script>
+  </body>
+</html>
