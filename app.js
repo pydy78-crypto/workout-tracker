@@ -372,6 +372,7 @@ function renderHistory() {
           <div class="history-actions">
             <span class="badge">${escapeHTML(session.focus)}</span>
             <button class="text-action-button" type="button" data-edit-session="${escapeHTML(session.id)}">Edit</button>
+            <button class="text-action-button" type="button" data-copy-session="${escapeHTML(session.id)}">Copy</button>
             <button class="text-danger-button" type="button" data-delete-session="${escapeHTML(session.id)}">Delete</button>
           </div>
         </div>
@@ -382,6 +383,10 @@ function renderHistory() {
         event.stopPropagation();
         loadSessionForEdit(session.id);
       });
+      card.querySelector("[data-copy-session]").addEventListener("click", (event) => {
+        event.stopPropagation();
+        copySessionToDate(session.id);
+      });
       card.querySelector("[data-delete-session]").addEventListener("click", (event) => {
         event.stopPropagation();
         deleteSession(session.id);
@@ -389,6 +394,38 @@ function renderHistory() {
 
       historyContainer.append(card);
     });
+}
+
+function copySessionToDate(sessionId) {
+  const session = sessions.find((item) => item.id === sessionId);
+
+  if (!session) {
+    importStatus.textContent = "Could not find that workout to copy.";
+    return;
+  }
+
+  const destination = prompt(`Copy ${formatDate(session.date)} workout to date (YYYY-MM-DD):`, todayISO());
+  const destinationDate = toISODate(destination);
+
+  if (!destination) {
+    return;
+  }
+
+  if (!destinationDate) {
+    importStatus.textContent = "Enter a valid date, such as 2026-05-31.";
+    return;
+  }
+
+  mergeSessionByDate({
+    id: crypto.randomUUID(),
+    date: destinationDate,
+    focus: session.focus,
+    notes: session.notes,
+    exercises: session.exercises.map((exercise) => ({ ...exercise }))
+  });
+  saveSessions();
+  render();
+  importStatus.textContent = `Copied ${formatDate(session.date)} workout to ${formatDate(destinationDate)}.`;
 }
 
 function getWeekRange(date = new Date()) {
