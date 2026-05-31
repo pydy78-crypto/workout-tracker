@@ -28,6 +28,7 @@ const progressEmpty = document.querySelector("#progress-empty");
 const equipmentGraph = document.querySelector("#equipment-graph");
 const exerciseProgress = document.querySelector("#exercise-progress");
 const statWorkouts = document.querySelector("#stat-workouts");
+const statSets = document.querySelector("#stat-sets");
 const headerBand = document.querySelector(".header-band");
 const tabTargets = document.querySelectorAll("[data-tab-target]");
 const tabPanels = document.querySelectorAll("[data-tab-panel]");
@@ -275,16 +276,19 @@ function monthlySessions() {
 function renderStats() {
   const today = todayISO();
   const todayEquipment = new Set();
+  let todaySets = 0;
 
   sessions
     .filter((session) => toISODate(session.date) === today)
     .forEach((session) => {
       session.exercises.forEach((exercise) => {
         todayEquipment.add((exercise.equipment || exercise.name).toLowerCase());
+        todaySets += Number(exercise.sets) || 0;
       });
     });
 
   statWorkouts.textContent = todayEquipment.size;
+  statSets.textContent = todaySets;
 }
 
 function renderDailyTable() {
