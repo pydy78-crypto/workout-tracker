@@ -590,7 +590,7 @@ function renderWeeklyProgress() {
 
   weeklyProgress.innerHTML = `
     <article class="weekly-option weekly-feature">
-      <h3>Selected week</h3>
+      <h3>Week Range by Date</h3>
       <div class="weekly-metrics">
         <div>
           <span>Gym Days</span>
