@@ -2,11 +2,11 @@
   color-scheme: light;
   --bg: #f4f7f6;
   --top: #e8f4f1;
-  --panel: #ffffff;
-  --panel-soft: #f7faf9;
+  --panel: #fbfcfc;
+  --panel-soft: #f1f6f4;
   --ink: #18312f;
   --muted: #647774;
-  --line: #dce9e6;
+  --line: #d8e5e2;
   --accent: #137c78;
   --accent-strong: #0b625f;
   --lime: #63b987;
@@ -124,7 +124,7 @@ h2 {
   padding: 14px;
   border: 1px solid rgba(19, 124, 120, 0.12);
   border-radius: 8px;
-  background: var(--panel);
+  background: #f7faf9;
   box-shadow: 0 4px 14px rgba(23, 26, 47, 0.05);
 }
 
@@ -226,7 +226,7 @@ textarea {
   min-height: 42px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #ffffff;
+  background: #f8fbfa;
   color: var(--ink);
   padding: 11px 13px;
   outline: none;
@@ -304,6 +304,7 @@ textarea:focus {
 }
 
 .daily-table thead th {
+  background: #eaf2f0;
   color: var(--muted);
   font-size: 0.74rem;
   font-weight: 900;
@@ -346,7 +347,7 @@ textarea:focus {
   padding: 14px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #ffffff;
+  background: #f9fbfa;
 }
 
 .weekly-option h3 {
@@ -504,7 +505,7 @@ textarea:focus {
   padding: 16px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #ffffff;
+  background: #f9fbfa;
 }
 
 .monthly-calendar-header {
@@ -606,7 +607,8 @@ textarea:focus {
 .weekly-table-wrap {
   overflow-x: auto;
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 8px;
+  background: #f5f9f7;
 }
 
 .weekly-table {
@@ -628,6 +630,7 @@ textarea:focus {
 }
 
 .weekly-table thead th {
+  background: #eaf2f0;
   color: var(--muted);
   font-size: 0.74rem;
   font-weight: 900;
@@ -673,7 +676,7 @@ textarea:focus {
 .chart-empty {
   border: 1px solid var(--line);
   border-radius: 0 0 8px 8px;
-  background: #ffffff;
+  background: #f9fbfa;
 }
 
 .chart-wrap {
@@ -748,6 +751,7 @@ textarea:focus {
 }
 
 .progress-table thead th {
+  background: #eaf2f0;
   color: var(--muted);
   font-size: 0.74rem;
   font-weight: 900;
@@ -944,7 +948,7 @@ textarea:focus {
   padding: 7px;
   border: 1px solid rgba(19, 124, 120, 0.18);
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(248, 251, 250, 0.94);
   box-shadow: 0 18px 45px rgba(24, 34, 51, 0.18);
   backdrop-filter: blur(18px);
 }
