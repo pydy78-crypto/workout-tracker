@@ -168,6 +168,81 @@ h2 {
   color: #5f7d79;
 }
 
+.theme-picker-preview {
+  margin-bottom: 22px;
+}
+
+.theme-picker-preview h2 {
+  margin-bottom: 4px;
+}
+
+.theme-picker-preview > p {
+  margin-bottom: 12px;
+  color: var(--muted);
+}
+
+.theme-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.theme-preview {
+  min-width: 0;
+  display: grid;
+  gap: 7px;
+  padding: 12px;
+  border: 1px solid;
+  border-radius: 8px;
+}
+
+.theme-preview span,
+.theme-preview small {
+  font-size: 0.74rem;
+  font-weight: 800;
+}
+
+.theme-preview strong {
+  font-size: 0.98rem;
+}
+
+.theme-preview i {
+  display: block;
+  width: 72%;
+  height: 8px;
+  border-radius: 999px;
+}
+
+.theme-preview-blue {
+  border-color: #cbd9e8;
+  background: #f4f7fb;
+  color: #304a65;
+}
+
+.theme-preview-blue i {
+  background: #5f83a8;
+}
+
+.theme-preview-plum {
+  border-color: #dfd1dc;
+  background: #faf6f9;
+  color: #684f65;
+}
+
+.theme-preview-plum i {
+  background: #a87896;
+}
+
+.theme-preview-charcoal {
+  border-color: #d8d6d2;
+  background: #f8f7f5;
+  color: #464541;
+}
+
+.theme-preview-charcoal i {
+  background: #d77968;
+}
+
 .weekly-progress-section {
   min-width: 0;
   margin-bottom: 24px;
@@ -1014,6 +1089,10 @@ textarea:focus {
   .progress-page-header {
     margin: -15px -15px 20px;
     padding: 16px 15px;
+  }
+
+  .theme-preview-grid {
+    grid-template-columns: 1fr;
   }
 
   .panel-header {
