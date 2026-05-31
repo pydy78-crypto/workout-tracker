@@ -147,6 +147,7 @@ h2 {
 }
 
 .progress-panel {
+  min-width: 0;
   margin-top: 24px;
 }
 
@@ -160,6 +161,7 @@ h2 {
 }
 
 .weekly-progress-section {
+  min-width: 0;
   margin-bottom: 24px;
   padding-bottom: 20px;
   border-bottom: 1px solid var(--line);
@@ -332,10 +334,13 @@ textarea:focus {
 }
 
 .weekly-progress {
+  min-width: 0;
   grid-template-columns: 1fr;
 }
 
 .weekly-option {
+  min-width: 0;
+  max-width: 100%;
   display: grid;
   gap: 12px;
   padding: 16px;
@@ -388,6 +393,8 @@ textarea:focus {
 }
 
 .weekly-trend {
+  min-width: 0;
+  max-width: 100%;
   overflow-x: auto;
 }
 
@@ -613,10 +620,12 @@ textarea:focus {
 }
 
 .exercise-progress {
+  min-width: 0;
   display: block;
 }
 
 .equipment-graph {
+  min-width: 0;
   margin-top: 14px;
 }
 
@@ -653,6 +662,7 @@ textarea:focus {
 }
 
 .chart-wrap {
+  max-width: 100%;
   overflow-x: auto;
   padding: 10px;
 }
@@ -975,7 +985,7 @@ textarea:focus {
   }
 
   .panel-header {
-    display: grid;
+    flex-wrap: wrap;
   }
 
   .graph-header {
@@ -986,9 +996,13 @@ textarea:focus {
     grid-template-columns: 1fr;
   }
 
-  .weekly-metrics,
+  .weekly-metrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
   .weekly-metrics.compact {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .activity-weekdays,
@@ -996,12 +1010,48 @@ textarea:focus {
     gap: 8px;
   }
 
-  .stats-grid,
   .progress-summary,
   .exercise-progress,
-  .form-grid,
-  .set-grid {
+  .form-grid {
     grid-template-columns: 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stat {
+    min-height: 82px;
+    padding: 13px;
+  }
+
+  .stat small {
+    font-size: 0.74rem;
+  }
+
+  .exercise-card {
+    position: relative;
+  }
+
+  .set-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .set-grid > label:first-child {
+    grid-column: 1 / -1;
+    padding-right: 46px;
+  }
+
+  .set-grid .remove-exercise {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+
+  .weekly-trend svg,
+  .weight-chart {
+    min-width: 0;
   }
 
   .daily-table,

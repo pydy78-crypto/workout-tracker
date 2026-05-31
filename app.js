@@ -21,8 +21,6 @@ const dailyTableWrap = document.querySelector("#daily-table-wrap");
 const dailyTableEmpty = document.querySelector("#daily-table-empty");
 const progressMonthInput = document.querySelector("#progress-month");
 const weeklyProgress = document.querySelector("#weekly-progress");
-const weekWorkouts = document.querySelector("#week-workouts");
-const weekEquipment = document.querySelector("#week-equipment");
 const monthWorkouts = document.querySelector("#month-workouts");
 const progressEmpty = document.querySelector("#progress-empty");
 const equipmentGraph = document.querySelector("#equipment-graph");
@@ -513,8 +511,6 @@ function renderWeeklyProgress() {
     });
   });
 
-  weekWorkouts.textContent = gymDays.size;
-  weekEquipment.textContent = equipment.size;
   const dayCards = [];
 
   for (let index = 0; index < 7; index += 1) {
