@@ -234,7 +234,7 @@ textarea {
   min-height: 42px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #f7f4f1;
+  background: #f6f9fc;
   color: var(--ink);
   padding: 11px 13px;
   outline: none;
@@ -355,7 +355,7 @@ textarea:focus {
   padding: 14px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #f8f6f3;
+  background: #f7f9fc;
 }
 
 .weekly-option h3 {
@@ -419,7 +419,7 @@ textarea:focus {
 }
 
 .weekly-trend-area {
-  fill: rgba(99, 185, 135, 0.24);
+  fill: rgba(127, 159, 189, 0.24);
 }
 
 .weekly-trend-line {
@@ -513,7 +513,7 @@ textarea:focus {
   padding: 16px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #f8f6f3;
+  background: #f7f9fc;
 }
 
 .monthly-calendar-header {
@@ -616,7 +616,7 @@ textarea:focus {
   overflow-x: auto;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #f5f9f7;
+  background: #f4f7fa;
 }
 
 .weekly-table {
@@ -684,7 +684,7 @@ textarea:focus {
 .chart-empty {
   border: 1px solid var(--line);
   border-radius: 0 0 8px 8px;
-  background: #f8f6f3;
+  background: #f7f9fc;
 }
 
 .chart-wrap {
@@ -956,7 +956,7 @@ textarea:focus {
   padding: 7px;
   border: 1px solid rgba(95, 131, 168, 0.18);
   border-radius: 16px;
-  background: rgba(248, 251, 250, 0.94);
+  background: rgba(248, 250, 253, 0.94);
   box-shadow: 0 18px 45px rgba(24, 34, 51, 0.18);
   backdrop-filter: blur(18px);
 }
