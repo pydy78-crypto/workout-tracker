@@ -152,12 +152,20 @@ h2 {
 }
 
 .progress-page-header {
-  margin-bottom: 22px;
+  margin: -20px -20px 22px;
+  padding: 20px;
+  border-bottom: 1px solid #d3e4e0;
+  background: #e5f1ef;
 }
 
 .progress-page-header h1 {
   margin-bottom: 0;
-  font-size: clamp(2.6rem, 10vw, 4rem);
+  color: #215b58;
+  font-size: clamp(2.35rem, 9vw, 3.55rem);
+}
+
+.progress-page-header .eyebrow {
+  color: #5f7d79;
 }
 
 .weekly-progress-section {
@@ -1001,6 +1009,11 @@ textarea:focus {
 
   .panel {
     padding: 15px;
+  }
+
+  .progress-page-header {
+    margin: -15px -15px 20px;
+    padding: 16px 15px;
   }
 
   .panel-header {
