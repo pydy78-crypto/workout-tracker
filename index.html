@@ -11,7 +11,7 @@
     <link rel="manifest" href="manifest.webmanifest">
     <link rel="icon" href="icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="icon.svg">
-    <link rel="stylesheet" href="styles.css?v=37">
+    <link rel="stylesheet" href="styles.css?v=38">
   </head>
   <body>
     <main class="app-shell">
@@ -43,7 +43,15 @@
           <div class="panel-header">
             <div>
               <h2>Weekly Progress</h2>
-              <p>This week’s gym days and equipment.</p>
+              <p>Review gym days and equipment for any week.</p>
+            </div>
+            <div class="week-picker">
+              <button class="icon-button week-arrow" id="previous-week" type="button" aria-label="Previous week" title="Previous week">‹</button>
+              <label>
+                Review week
+                <input id="review-week-date" type="date">
+              </label>
+              <button class="icon-button week-arrow" id="next-week" type="button" aria-label="Next week" title="Next week">›</button>
             </div>
           </div>
           <div id="weekly-progress" class="weekly-progress"></div>
@@ -203,6 +211,6 @@
       </article>
     </template>
 
-    <script src="app.js?v=75"></script>
+    <script src="app.js?v=76"></script>
   </body>
 </html>

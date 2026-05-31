@@ -175,6 +175,22 @@ h2 {
   border-bottom: 1px solid var(--line);
 }
 
+.week-picker {
+  display: flex;
+  align-items: end;
+  gap: 8px;
+}
+
+.week-picker label {
+  min-width: 160px;
+}
+
+.week-arrow {
+  flex: 0 0 auto;
+  font-size: 1.45rem;
+  line-height: 1;
+}
+
 .workspace {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -1018,6 +1034,15 @@ textarea:focus {
 
   .panel-header {
     flex-wrap: wrap;
+  }
+
+  .week-picker {
+    width: 100%;
+  }
+
+  .week-picker label {
+    min-width: 0;
+    flex: 1;
   }
 
   .graph-header {

@@ -22,6 +22,9 @@ const dailyTableBody = document.querySelector("#daily-table-body");
 const dailyTableWrap = document.querySelector("#daily-table-wrap");
 const dailyTableEmpty = document.querySelector("#daily-table-empty");
 const progressMonthInput = document.querySelector("#progress-month");
+const reviewWeekDateInput = document.querySelector("#review-week-date");
+const previousWeekButton = document.querySelector("#previous-week");
+const nextWeekButton = document.querySelector("#next-week");
 const weeklyProgress = document.querySelector("#weekly-progress");
 const monthWorkouts = document.querySelector("#month-workouts");
 const progressEmpty = document.querySelector("#progress-empty");
@@ -515,7 +518,10 @@ function renderMonthActivityGrid() {
 }
 
 function renderWeeklyProgress() {
-  const { start, end } = getWeekRange();
+  const selectedDate = reviewWeekDateInput.value
+    ? new Date(`${reviewWeekDateInput.value}T00:00:00`)
+    : new Date();
+  const { start, end } = getWeekRange(selectedDate);
   const startISO = dateToISO(start);
   const endISO = dateToISO(end);
   const weekSessions = sessions.filter((session) => {
@@ -583,7 +589,7 @@ function renderWeeklyProgress() {
 
   weeklyProgress.innerHTML = `
     <article class="weekly-option weekly-feature">
-      <h3>This week</h3>
+      <h3>Selected week</h3>
       <div class="weekly-metrics">
         <div>
           <span>Gym Days</span>
@@ -600,7 +606,7 @@ function renderWeeklyProgress() {
       </div>
       <p class="weekly-days-line">Days: ${escapeHTML(daysLabel)}</p>
       <div>
-        <p class="weekly-subtitle">This week</p>
+        <p class="weekly-subtitle">${escapeHTML(weekLabel)}</p>
         ${renderThisWeekChart(dayCards)}
       </div>
     </article>
@@ -712,6 +718,16 @@ function renderMonthlyProgress() {
       </div>
     ` : ""}
   `;
+}
+
+function shiftReviewWeek(days) {
+  const selectedDate = reviewWeekDateInput.value
+    ? new Date(`${reviewWeekDateInput.value}T00:00:00`)
+    : new Date();
+
+  selectedDate.setDate(selectedDate.getDate() + days);
+  reviewWeekDateInput.value = dateToISO(selectedDate);
+  renderWeeklyProgress();
 }
 
 function renderEquipmentGraph(monthSessions, equipmentProgress) {
@@ -1589,6 +1605,9 @@ tabTargets.forEach((target) => {
   });
 });
 progressMonthInput.addEventListener("change", renderMonthlyProgress);
+reviewWeekDateInput.addEventListener("change", renderWeeklyProgress);
+previousWeekButton.addEventListener("click", () => shiftReviewWeek(-7));
+nextWeekButton.addEventListener("click", () => shiftReviewWeek(7));
 clearFormButton.addEventListener("click", () => {
   resetForm();
   importStatus.textContent = "Workout form cleared.";
@@ -1653,6 +1672,7 @@ form.addEventListener("submit", (event) => {
 });
 
 progressMonthInput.value = currentMonth();
+reviewWeekDateInput.value = todayISO();
 resetForm();
 render();
 setActiveTab(window.location.hash === "#progress" ? "progress" : window.location.hash === "#diary" ? "diary" : "today");
