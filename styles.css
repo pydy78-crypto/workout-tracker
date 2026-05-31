@@ -96,6 +96,50 @@ h1 {
   margin-bottom: 0;
 }
 
+.today-date-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid rgba(95, 131, 168, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.58);
+  color: var(--accent-strong);
+}
+
+.today-date-icon {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.today-date-badge span {
+  display: grid;
+  gap: 2px;
+}
+
+.today-date-badge strong,
+.today-date-badge small {
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.today-date-badge strong {
+  font-size: 0.76rem;
+}
+
+.today-date-badge small {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
 h2 {
   margin-bottom: 6px;
   font-size: 1.55rem;
@@ -1021,6 +1065,14 @@ textarea:focus {
   .header-band {
     margin-inline: -12px;
     padding: 24px 18px 20px;
+  }
+
+  .today-title-row {
+    gap: 10px;
+  }
+
+  .today-date-badge {
+    padding: 7px 8px;
   }
 
   .panel {

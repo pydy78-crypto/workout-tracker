@@ -18,6 +18,8 @@ const importPasteButton = document.querySelector("#import-paste");
 const historyContainer = document.querySelector("#workout-history");
 const emptyState = document.querySelector("#empty-state");
 const todayDateLabel = document.querySelector("#today-date-label");
+const todayHeaderWeekday = document.querySelector("#today-header-weekday");
+const todayHeaderDate = document.querySelector("#today-header-date");
 const dailyTableBody = document.querySelector("#daily-table-body");
 const dailyTableWrap = document.querySelector("#daily-table-wrap");
 const dailyTableEmpty = document.querySelector("#daily-table-empty");
@@ -280,6 +282,7 @@ function monthlySessions() {
 
 function renderStats() {
   const today = todayISO();
+  const todayDate = new Date(`${today}T00:00:00`);
   const todayEquipment = new Set();
   let todaySets = 0;
 
@@ -294,6 +297,14 @@ function renderStats() {
 
   statWorkouts.textContent = todayEquipment.size;
   statSets.textContent = todaySets;
+  todayHeaderWeekday.textContent = new Intl.DateTimeFormat(undefined, {
+    weekday: "long"
+  }).format(todayDate);
+  todayHeaderDate.textContent = new Intl.DateTimeFormat(undefined, {
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+  }).format(todayDate);
 }
 
 function renderDailyTable() {

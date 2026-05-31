@@ -11,7 +11,7 @@
     <link rel="manifest" href="manifest.webmanifest">
     <link rel="icon" href="icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="icon.svg">
-    <link rel="stylesheet" href="styles.css?v=38">
+    <link rel="stylesheet" href="styles.css?v=39">
   </head>
   <body>
     <main class="app-shell">
@@ -20,6 +20,15 @@
           <p class="eyebrow">Workout Tracker</p>
           <div class="today-title-row">
             <h1>Today</h1>
+            <div class="today-date-badge" aria-label="Today's date">
+              <svg class="today-date-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 3v3M17 3v3M4 9h16M6 5h12a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"></path>
+              </svg>
+              <span>
+                <strong id="today-header-weekday"></strong>
+                <small id="today-header-date"></small>
+              </span>
+            </div>
           </div>
         </div>
         <div class="stats-grid" aria-label="Workout summary">
@@ -208,6 +217,6 @@
       </article>
     </template>
 
-    <script src="app.js?v=80"></script>
+    <script src="app.js?v=81"></script>
   </body>
 </html>
