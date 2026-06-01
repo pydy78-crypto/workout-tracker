@@ -97,31 +97,22 @@ h1 {
 }
 
 .today-date-badge {
-  display: flex;
+  display: grid;
+  place-items: center;
   align-items: center;
-  gap: 8px;
-  min-width: 0;
-  padding: 8px 10px;
+  width: 70px;
+  height: 70px;
+  flex: 0 0 70px;
   border: 1px solid rgba(95, 131, 168, 0.2);
-  border-radius: 8px;
+  border-radius: 50%;
   background: rgba(255, 255, 255, 0.58);
   color: var(--accent-strong);
-}
-
-.today-date-icon {
-  width: 20px;
-  height: 20px;
-  flex: 0 0 auto;
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.8;
+  text-align: center;
 }
 
 .today-date-badge span {
   display: grid;
-  gap: 2px;
+  gap: 4px;
 }
 
 .today-date-badge strong,
@@ -131,13 +122,17 @@ h1 {
 }
 
 .today-date-badge strong {
-  font-size: 0.76rem;
+  font-size: 0.72rem;
 }
 
 .today-date-badge small {
   color: var(--muted);
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   font-weight: 800;
+}
+
+.today-date-badge .today-header-year {
+  font-size: 0.62rem;
 }
 
 h2 {
@@ -221,12 +216,34 @@ h2 {
 
 .week-picker {
   display: flex;
-  align-items: end;
+  align-items: center;
   gap: 8px;
 }
 
 .week-picker label {
   min-width: 160px;
+}
+
+.progress-control-header {
+  align-items: end;
+}
+
+.progress-control-header h2 {
+  margin-bottom: 10px;
+}
+
+.week-date-field {
+  display: block;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
 }
 
 .week-arrow {
@@ -1148,7 +1165,9 @@ textarea:focus {
   }
 
   .today-date-badge {
-    padding: 7px 8px;
+    width: 64px;
+    height: 64px;
+    flex-basis: 64px;
   }
 
   .panel {
@@ -1164,13 +1183,41 @@ textarea:focus {
     flex-wrap: wrap;
   }
 
+  .panel-header.progress-control-header {
+    flex-wrap: nowrap;
+    align-items: end;
+    gap: 8px;
+  }
+
+  .progress-control-header h2 {
+    margin-bottom: 10px;
+    font-size: 1.08rem;
+    white-space: nowrap;
+  }
+
   .week-picker {
-    width: 100%;
+    width: auto;
+    min-width: 0;
+    flex: 1;
+    gap: 4px;
   }
 
   .week-picker label {
     min-width: 0;
-    flex: 1;
+    flex: 0 0 120px;
+  }
+
+  .week-picker input {
+    padding-inline: 5px;
+    font-size: 0.68rem;
+  }
+
+  .week-arrow {
+    display: none;
+  }
+
+  .month-picker {
+    width: 128px;
   }
 
   .graph-header {
@@ -1199,6 +1246,10 @@ textarea:focus {
   .exercise-progress,
   .form-grid {
     grid-template-columns: 1fr;
+  }
+
+  .progress-summary {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .stats-grid {

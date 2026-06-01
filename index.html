@@ -11,7 +11,7 @@
     <link rel="manifest" href="manifest.webmanifest">
     <link rel="icon" href="icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="icon.svg">
-    <link rel="stylesheet" href="styles.css?v=41">
+    <link rel="stylesheet" href="styles.css?v=42">
   </head>
   <body>
     <main class="app-shell">
@@ -21,12 +21,10 @@
           <div class="today-title-row">
             <h1>Today</h1>
             <div class="today-date-badge" aria-label="Today's date">
-              <svg class="today-date-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M7 3v3M17 3v3M4 9h16M6 5h12a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"></path>
-              </svg>
               <span>
                 <strong id="today-header-weekday"></strong>
                 <small id="today-header-date"></small>
+                <small class="today-header-year" id="today-header-year"></small>
               </span>
             </div>
           </div>
@@ -49,15 +47,15 @@
           <h1>Progress</h1>
         </header>
         <div class="weekly-progress-section">
-          <div class="panel-header">
+          <div class="panel-header progress-control-header">
             <div>
               <h2>Weekly Progress</h2>
             </div>
             <div class="week-picker">
               <button class="icon-button week-arrow" id="previous-week" type="button" aria-label="Previous week" title="Previous week">‹</button>
-              <label>
-                Review week
-                <input id="review-week-date" type="date">
+              <label class="week-date-field">
+                <span class="visually-hidden">Choose week</span>
+                <input id="review-week-date" type="date" aria-label="Choose week">
               </label>
               <button class="icon-button week-arrow" id="next-week" type="button" aria-label="Next week" title="Next week">›</button>
             </div>
@@ -65,7 +63,7 @@
           <div id="weekly-progress" class="weekly-progress"></div>
         </div>
 
-        <div class="panel-header">
+        <div class="panel-header progress-control-header">
           <div>
             <h2>Monthly Progress</h2>
           </div>
@@ -78,6 +76,14 @@
           <div class="stat">
             <span id="month-workouts">0</span>
             <small>Gym Days</small>
+          </div>
+          <div class="stat">
+            <span id="month-equipment">0</span>
+            <small>Equipment</small>
+          </div>
+          <div class="stat">
+            <span id="month-sets">0</span>
+            <small>Sets</small>
           </div>
         </div>
         <div id="progress-empty" class="empty-state">
@@ -217,6 +223,6 @@
       </article>
     </template>
 
-    <script src="app.js?v=83"></script>
+    <script src="app.js?v=84"></script>
   </body>
 </html>

@@ -20,6 +20,7 @@ const emptyState = document.querySelector("#empty-state");
 const todayDateLabel = document.querySelector("#today-date-label");
 const todayHeaderWeekday = document.querySelector("#today-header-weekday");
 const todayHeaderDate = document.querySelector("#today-header-date");
+const todayHeaderYear = document.querySelector("#today-header-year");
 const dailyTableBody = document.querySelector("#daily-table-body");
 const dailyTableWrap = document.querySelector("#daily-table-wrap");
 const dailyTableEmpty = document.querySelector("#daily-table-empty");
@@ -30,6 +31,8 @@ const previousWeekButton = document.querySelector("#previous-week");
 const nextWeekButton = document.querySelector("#next-week");
 const weeklyProgress = document.querySelector("#weekly-progress");
 const monthWorkouts = document.querySelector("#month-workouts");
+const monthEquipment = document.querySelector("#month-equipment");
+const monthSets = document.querySelector("#month-sets");
 const progressEmpty = document.querySelector("#progress-empty");
 const equipmentGraph = document.querySelector("#equipment-graph");
 const exerciseProgress = document.querySelector("#exercise-progress");
@@ -302,9 +305,9 @@ function renderStats() {
   }).format(todayDate);
   todayHeaderDate.textContent = new Intl.DateTimeFormat(undefined, {
     month: "short",
-    day: "numeric",
-    year: "numeric"
+    day: "numeric"
   }).format(todayDate);
+  todayHeaderYear.textContent = todayDate.getFullYear();
 }
 
 function renderDailyTable() {
@@ -730,6 +733,7 @@ function renderMonthlyProgress() {
   const monthSessions = monthlySessions();
   const gymDays = new Set(monthSessions.map((session) => toISODate(session.date)));
   const equipmentProgress = new Map();
+  let totalSets = 0;
 
   monthSessions.forEach((session) => {
     session.exercises.forEach((exercise) => {
@@ -746,6 +750,7 @@ function renderMonthlyProgress() {
       };
       const sessionDate = toISODate(session.date);
 
+      totalSets += Number(exercise.sets) || 0;
       current.bestWeight = Math.max(current.bestWeight, exercise.weight);
       current.exercises.add(exercise.name);
       current.days.add(sessionDate);
@@ -759,6 +764,8 @@ function renderMonthlyProgress() {
   });
 
   monthWorkouts.textContent = gymDays.size;
+  monthEquipment.textContent = equipmentProgress.size;
+  monthSets.textContent = totalSets;
   progressEmpty.hidden = monthSessions.length > 0;
   renderEquipmentGraph(monthSessions, equipmentProgress);
   exerciseProgress.replaceChildren();
