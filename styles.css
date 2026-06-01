@@ -368,7 +368,7 @@ textarea:focus {
   padding: 14px 16px;
   border-bottom: 1px solid var(--line);
   text-align: left;
-  vertical-align: top;
+  vertical-align: middle;
 }
 
 .daily-table thead th {
@@ -690,6 +690,7 @@ textarea:focus {
   padding: 12px;
   border-bottom: 1px solid var(--line);
   text-align: left;
+  vertical-align: middle;
 }
 
 .weekly-table tr:last-child th,
@@ -815,7 +816,7 @@ textarea:focus {
   padding: 14px 16px;
   border-bottom: 1px solid var(--line);
   text-align: left;
-  vertical-align: top;
+  vertical-align: middle;
 }
 
 .progress-table thead th {
