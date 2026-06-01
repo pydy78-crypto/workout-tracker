@@ -594,6 +594,7 @@ function renderWeeklyProgress() {
     .sort((a, b) => b.sets - a.sets || a.name.localeCompare(b.name));
   const totalSets = equipmentRows.reduce((total, row) => total + row.sets, 0);
   const weekLabel = `${start.toLocaleDateString(undefined, { month: "numeric", day: "numeric" })} - ${end.toLocaleDateString(undefined, { month: "numeric", day: "numeric" })}`;
+  const trainingSummary = renderWeeklyTrainingSummary(weekSessions);
   weeklyProgress.innerHTML = `
     <article class="weekly-option weekly-feature">
       <h3>Week Range by Date</h3>
@@ -615,6 +616,7 @@ function renderWeeklyProgress() {
         <p class="weekly-subtitle">${escapeHTML(weekLabel)}</p>
         ${renderThisWeekChart(dayCards)}
       </div>
+      ${trainingSummary}
     </article>
 
     <article class="weekly-option">
@@ -646,6 +648,82 @@ function renderWeeklyProgress() {
       </div>
     </article>
   `;
+}
+
+function renderWeeklyTrainingSummary(weekSessions) {
+  const setsByRegion = new Map();
+
+  weekSessions.forEach((session) => {
+    session.exercises.forEach((exercise) => {
+      const sets = Number(exercise.sets) || 0;
+
+      inferWorkoutRegions(exercise.muscles || inferTrainingParts(exercise.equipment || exercise.name))
+        .forEach((region) => setsByRegion.set(region, (setsByRegion.get(region) || 0) + sets));
+    });
+  });
+
+  const regions = [...setsByRegion.entries()]
+    .map(([name, sets]) => ({ name, sets }))
+    .sort((a, b) => b.sets - a.sets || a.name.localeCompare(b.name));
+
+  if (!regions.length) {
+    return `
+      <section class="weekly-training-summary">
+        <div class="summary-heading">
+          <h4>Weekly Training Summary</h4>
+          <span>On-device analysis</span>
+        </div>
+        <p class="summary-empty">Log a workout to see which body parts you trained this week.</p>
+      </section>
+    `;
+  }
+
+  const maxSets = regions[0].sets;
+  const topRegions = regions.slice(0, 4);
+  const focusNames = topRegions.slice(0, 2).map((region) => region.name.toLowerCase());
+  const focusText = focusNames.length === 1
+    ? `Your main focus this week is ${focusNames[0]}.`
+    : `Your strongest focus this week is ${focusNames[0]} and ${focusNames[1]}.`;
+
+  return `
+    <section class="weekly-training-summary">
+      <div class="summary-heading">
+        <h4>Weekly Training Summary</h4>
+        <span>On-device analysis</span>
+      </div>
+      <p class="summary-insight">${escapeHTML(focusText)}</p>
+      <div class="training-region-list">
+        ${topRegions.map((region) => `
+          <div class="training-region">
+            <div>
+              <strong>${escapeHTML(region.name)}</strong>
+              <span>${region.sets} set${region.sets === 1 ? "" : "s"}</span>
+            </div>
+            <div class="training-region-track">
+              <span style="width: ${Math.max(10, Math.round((region.sets / maxSets) * 100))}%"></span>
+            </div>
+          </div>
+        `).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function inferWorkoutRegions(muscles) {
+  const text = String(muscles || "").toLowerCase();
+  const rules = [
+    { name: "Back", match: ["back", "lats", "rhomboids"] },
+    { name: "Legs", match: ["quadriceps", "hamstrings", "calves", "thighs"] },
+    { name: "Core", match: ["core", "abs", "obliques", "hip flexors"] },
+    { name: "Glutes", match: ["glutes"] },
+    { name: "Chest", match: ["chest"] },
+    { name: "Shoulders", match: ["shoulders"] },
+    { name: "Arms", match: ["biceps", "triceps"] }
+  ];
+
+  return rules
+    .filter((rule) => rule.match.some((part) => text.includes(part)))
+    .map((rule) => rule.name);
 }
 
 function renderMonthlyProgress() {

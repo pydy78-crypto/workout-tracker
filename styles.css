@@ -426,6 +426,81 @@ textarea:focus {
   gap: 14px;
 }
 
+.weekly-training-summary {
+  display: grid;
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.summary-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.summary-heading h4,
+.summary-insight,
+.summary-empty {
+  margin: 0;
+}
+
+.summary-heading h4 {
+  font-size: 1rem;
+}
+
+.summary-heading span,
+.summary-empty,
+.summary-insight {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 750;
+}
+
+.summary-heading span {
+  white-space: nowrap;
+}
+
+.training-region-list {
+  display: grid;
+  gap: 9px;
+}
+
+.training-region {
+  display: grid;
+  grid-template-columns: minmax(88px, 0.45fr) minmax(100px, 1fr);
+  align-items: center;
+  gap: 10px;
+}
+
+.training-region > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  color: var(--ink);
+  font-size: 0.78rem;
+}
+
+.training-region > div:first-child span {
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.training-region-track {
+  height: 7px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e2eaf2;
+}
+
+.training-region-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+}
+
 .weekly-days-line {
   margin: 0;
   color: var(--muted);
@@ -1168,7 +1243,24 @@ textarea:focus {
   .weekly-table,
   .progress-table {
     min-width: 0;
+    table-layout: fixed;
     font-size: 0.76rem;
+  }
+
+  .daily-table th:not(:first-child),
+  .daily-table td:not(:first-child),
+  .weekly-table th:not(:first-child),
+  .weekly-table td:not(:first-child),
+  .progress-table th:not(:first-child),
+  .progress-table td:not(:first-child) {
+    width: 18%;
+    text-align: center;
+  }
+
+  .daily-table th:first-child,
+  .weekly-table th:first-child,
+  .progress-table th:first-child {
+    overflow-wrap: anywhere;
   }
 
   .daily-table th,
@@ -1182,6 +1274,10 @@ textarea:focus {
 
   .weekly-option {
     padding: 12px;
+  }
+
+  .training-region {
+    grid-template-columns: 108px minmax(0, 1fr);
   }
 
   .weekly-metrics strong {
