@@ -33,11 +33,13 @@ const weeklyProgress = document.querySelector("#weekly-progress");
 const monthWorkouts = document.querySelector("#month-workouts");
 const monthEquipment = document.querySelector("#month-equipment");
 const monthSets = document.querySelector("#month-sets");
+const monthCalories = document.querySelector("#month-calories");
 const progressEmpty = document.querySelector("#progress-empty");
 const equipmentGraph = document.querySelector("#equipment-graph");
 const exerciseProgress = document.querySelector("#exercise-progress");
 const statWorkouts = document.querySelector("#stat-workouts");
 const statSets = document.querySelector("#stat-sets");
+const statCalories = document.querySelector("#stat-calories");
 const headerBand = document.querySelector(".header-band");
 const tabTargets = document.querySelectorAll("[data-tab-target]");
 const tabPanels = document.querySelectorAll("[data-tab-panel]");
@@ -84,6 +86,9 @@ const NO_WEIGHT_EQUIPMENT = new Set([
   "Plank",
   "Side Plank"
 ]);
+
+const DEFAULT_BODY_WEIGHT_LB = 150;
+const MINUTES_PER_SET_ESTIMATE = 1.5;
 
 const EQUIPMENT_KEYWORDS = [
   "barbell",
@@ -288,6 +293,7 @@ function renderStats() {
   const todayDate = new Date(`${today}T00:00:00`);
   const todayEquipment = new Set();
   let todaySets = 0;
+  let todayCalories = 0;
 
   sessions
     .filter((session) => toISODate(session.date) === today)
@@ -295,11 +301,13 @@ function renderStats() {
       session.exercises.forEach((exercise) => {
         todayEquipment.add((exercise.equipment || exercise.name).toLowerCase());
         todaySets += Number(exercise.sets) || 0;
+        todayCalories += estimateExerciseCalories(exercise);
       });
     });
 
   statWorkouts.textContent = todayEquipment.size;
   statSets.textContent = todaySets;
+  statCalories.textContent = Math.round(todayCalories);
   todayHeaderWeekday.textContent = new Intl.DateTimeFormat(undefined, {
     weekday: "long"
   }).format(todayDate);
@@ -486,16 +494,20 @@ function renderThisWeekChart(days) {
     x: padding + index * xStep,
     y: height - padding - (day.sets / maxSets) * (height - padding * 2)
   }));
-  const path = points.map((point, index) => `${index === 0 ? "M" : "L"} ${point.x} ${point.y}`).join(" ");
-  const areaPath = `${path} L ${width - padding} ${height - padding} L ${padding} ${height - padding} Z`;
+  const plottedPoints = points.filter((point) => point.iso <= todayISO());
+  const path = plottedPoints.map((point, index) => `${index === 0 ? "M" : "L"} ${point.x} ${point.y}`).join(" ");
+  const lastPoint = plottedPoints.at(-1);
+  const areaPath = lastPoint
+    ? `${path} L ${lastPoint.x} ${height - padding} L ${padding} ${height - padding} Z`
+    : "";
 
   return `
     <div class="weekly-trend">
       <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="This week sets trend">
         <path class="weekly-trend-area" d="${areaPath}" />
         <path class="weekly-trend-line" d="${path}" />
-        ${points.map((point, index) => `
-          <circle class="${index === points.length - 1 ? "is-latest" : ""}" cx="${point.x}" cy="${point.y}" r="5" />
+        ${plottedPoints.map((point, index) => `
+          <circle class="${index === plottedPoints.length - 1 ? "is-latest" : ""}" cx="${point.x}" cy="${point.y}" r="5" />
         `).join("")}
         <line x1="${padding}" y1="${height - padding}" x2="${width - padding}" y2="${height - padding}" />
         ${points.map((point) => `<text x="${point.x}" y="${height - 2}" text-anchor="middle">${escapeHTML(point.weekday.slice(0, 1))}</text>`).join("")}
@@ -596,6 +608,7 @@ function renderWeeklyProgress() {
   const equipmentRows = [...setsByEquipment.values()]
     .sort((a, b) => b.sets - a.sets || a.name.localeCompare(b.name));
   const totalSets = equipmentRows.reduce((total, row) => total + row.sets, 0);
+  const totalCalories = estimateSessionsCalories(weekSessions);
   const weekLabel = `${start.toLocaleDateString(undefined, { month: "numeric", day: "numeric" })} - ${end.toLocaleDateString(undefined, { month: "numeric", day: "numeric" })}`;
   const trainingSummary = renderWeeklyTrainingSummary(weekSessions);
   weeklyProgress.innerHTML = `
@@ -613,6 +626,10 @@ function renderWeeklyProgress() {
         <div>
           <span>Sets</span>
           <strong>${totalSets}</strong>
+        </div>
+        <div>
+          <span>Est. Cal</span>
+          <strong>${Math.round(totalCalories)}</strong>
         </div>
       </div>
       <div>
@@ -729,11 +746,51 @@ function inferWorkoutRegions(muscles) {
     .map((rule) => rule.name);
 }
 
+function estimateSessionsCalories(sessionList) {
+  return sessionList.reduce((total, session) => (
+    total + session.exercises.reduce((sessionTotal, exercise) => (
+      sessionTotal + estimateExerciseCalories(exercise)
+    ), 0)
+  ), 0);
+}
+
+function estimateExerciseCalories(exercise) {
+  const sets = Number(exercise.sets) || 0;
+  const minutes = sets * MINUTES_PER_SET_ESTIMATE;
+  const bodyWeightKg = DEFAULT_BODY_WEIGHT_LB * 0.453592;
+  const met = estimatedExerciseMet(exercise);
+
+  return (met * 3.5 * bodyWeightKg * minutes) / 200;
+}
+
+function estimatedExerciseMet(exercise) {
+  const text = equipmentLookupText(`${exercise.equipment || ""} ${exercise.name || ""} ${exercise.muscles || ""}`);
+
+  if (text.includes("plank") || text.includes("captain") || text.includes("core") || text.includes("abs")) {
+    return 3.0;
+  }
+
+  if (text.includes("leg press") || text.includes("leg extension") || text.includes("leg curl") || text.includes("hip") || text.includes("calf")) {
+    return 4.5;
+  }
+
+  if (text.includes("row") || text.includes("pulldown") || text.includes("press")) {
+    return 4.0;
+  }
+
+  if (text.includes("back extension")) {
+    return 3.8;
+  }
+
+  return 3.5;
+}
+
 function renderMonthlyProgress() {
   const monthSessions = monthlySessions();
   const gymDays = new Set(monthSessions.map((session) => toISODate(session.date)));
   const equipmentProgress = new Map();
   let totalSets = 0;
+  let totalCalories = 0;
 
   monthSessions.forEach((session) => {
     session.exercises.forEach((exercise) => {
@@ -751,6 +808,7 @@ function renderMonthlyProgress() {
       const sessionDate = toISODate(session.date);
 
       totalSets += Number(exercise.sets) || 0;
+      totalCalories += estimateExerciseCalories(exercise);
       current.bestWeight = Math.max(current.bestWeight, exercise.weight);
       current.exercises.add(exercise.name);
       current.days.add(sessionDate);
@@ -766,6 +824,7 @@ function renderMonthlyProgress() {
   monthWorkouts.textContent = gymDays.size;
   monthEquipment.textContent = equipmentProgress.size;
   monthSets.textContent = totalSets;
+  monthCalories.textContent = Math.round(totalCalories);
   progressEmpty.hidden = monthSessions.length > 0;
   renderEquipmentGraph(monthSessions, equipmentProgress);
   exerciseProgress.replaceChildren();
