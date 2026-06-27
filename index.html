@@ -11,7 +11,7 @@
     <link rel="manifest" href="manifest.webmanifest">
     <link rel="icon" href="icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="icon.svg">
-    <link rel="stylesheet" href="styles.css?v=42">
+    <link rel="stylesheet" href="styles.css?v=43">
   </head>
   <body>
     <main class="app-shell">
@@ -182,10 +182,46 @@
           <div id="workout-history" class="workout-history"></div>
         </section>
       </section>
+      <section class="panel personal-panel" data-tab-panel="personal" hidden>
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Workout Tracker</p>
+            <h2>Personal</h2>
+          </div>
+        </div>
+        <form id="personal-form" class="personal-form" autocomplete="off">
+          <div class="form-grid">
+            <label>
+              Body weight
+              <div class="input-with-unit">
+                <input id="body-weight" type="number" min="1" step="0.1" inputmode="decimal">
+                <span>lb</span>
+              </div>
+            </label>
+            <label>
+              Height feet
+              <input id="height-feet" type="number" min="0" step="1" inputmode="numeric">
+            </label>
+            <label>
+              Height inches
+              <input id="height-inches" type="number" min="0" max="11" step="1" inputmode="numeric">
+            </label>
+          </div>
+          <p id="personal-status" class="import-status" role="status" aria-live="polite"></p>
+          <div class="form-actions">
+            <button class="primary-button" type="submit">Save Personal Info</button>
+          </div>
+        </form>
+        <div class="empty-state personal-note">
+          <strong>Calories use your body weight</strong>
+          <span>Height is saved for your profile. Estimated calories update after saving weight.</span>
+        </div>
+      </section>
       <nav class="bottom-nav" aria-label="Primary">
         <a href="#today" data-tab-target="today" aria-current="page">Today</a>
         <a href="#progress" data-tab-target="progress">Progress</a>
         <a href="#diary" data-tab-target="diary">Diary</a>
+        <a href="#personal" data-tab-target="personal">Personal</a>
       </nav>
     </main>
 
@@ -231,6 +267,6 @@
       </article>
     </template>
 
-    <script src="app.js?v=86"></script>
+    <script src="app.js?v=87"></script>
   </body>
 </html>

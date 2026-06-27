@@ -1015,6 +1015,27 @@ textarea:focus {
   justify-self: end;
 }
 
+.input-with-unit {
+  position: relative;
+}
+
+.input-with-unit input {
+  padding-right: 42px;
+}
+
+.input-with-unit span {
+  position: absolute;
+  right: 13px;
+  bottom: 13px;
+  color: var(--muted);
+  font-weight: 900;
+  pointer-events: none;
+}
+
+.personal-note {
+  margin-top: 14px;
+}
+
 .empty-state {
   display: grid;
   gap: 6px;
@@ -1103,7 +1124,7 @@ textarea:focus {
   width: min(560px, calc(100% - 24px));
   transform: translateX(-50%);
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 8px;
   align-items: center;
   padding: 7px;

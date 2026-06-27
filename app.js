@@ -1,4 +1,5 @@
 const STORAGE_KEY = "workout-tracker.sessions";
+const PROFILE_STORAGE_KEY = "workout-tracker.profile";
 
 const form = document.querySelector("#workout-form");
 const dateInput = document.querySelector("#workout-date");
@@ -15,6 +16,11 @@ const exportHistoryButton = document.querySelector("#export-history");
 const importStatus = document.querySelector("#import-status");
 const pasteDataInput = document.querySelector("#paste-data");
 const importPasteButton = document.querySelector("#import-paste");
+const personalForm = document.querySelector("#personal-form");
+const bodyWeightInput = document.querySelector("#body-weight");
+const heightFeetInput = document.querySelector("#height-feet");
+const heightInchesInput = document.querySelector("#height-inches");
+const personalStatus = document.querySelector("#personal-status");
 const historyContainer = document.querySelector("#workout-history");
 const emptyState = document.querySelector("#empty-state");
 const todayDateLabel = document.querySelector("#today-date-label");
@@ -108,8 +114,31 @@ const EQUIPMENT_KEYWORDS = [
 ];
 
 let sessions = loadSessions();
+let profile = loadProfile();
 let editingSessionId = "";
 repairTimezoneRollover();
+
+function loadProfile() {
+  try {
+    const savedProfile = JSON.parse(localStorage.getItem(PROFILE_STORAGE_KEY)) || {};
+
+    return {
+      bodyWeightLb: Number(savedProfile.bodyWeightLb) || DEFAULT_BODY_WEIGHT_LB,
+      heightFeet: Number(savedProfile.heightFeet) || "",
+      heightInches: Number(savedProfile.heightInches) || ""
+    };
+  } catch {
+    return {
+      bodyWeightLb: DEFAULT_BODY_WEIGHT_LB,
+      heightFeet: "",
+      heightInches: ""
+    };
+  }
+}
+
+function saveProfile() {
+  localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(profile));
+}
 
 function loadSessions() {
   try {
@@ -757,10 +786,31 @@ function estimateSessionsCalories(sessionList) {
 function estimateExerciseCalories(exercise) {
   const sets = Number(exercise.sets) || 0;
   const minutes = sets * MINUTES_PER_SET_ESTIMATE;
-  const bodyWeightKg = DEFAULT_BODY_WEIGHT_LB * 0.453592;
+  const bodyWeightKg = (Number(profile.bodyWeightLb) || DEFAULT_BODY_WEIGHT_LB) * 0.453592;
   const met = estimatedExerciseMet(exercise);
 
   return (met * 3.5 * bodyWeightKg * minutes) / 200;
+}
+
+function renderPersonalProfile() {
+  bodyWeightInput.value = profile.bodyWeightLb || "";
+  heightFeetInput.value = profile.heightFeet || "";
+  heightInchesInput.value = profile.heightInches || "";
+}
+
+function savePersonalProfile(event) {
+  event.preventDefault();
+
+  profile = {
+    bodyWeightLb: Number(bodyWeightInput.value) || DEFAULT_BODY_WEIGHT_LB,
+    heightFeet: Number(heightFeetInput.value) || "",
+    heightInches: Number(heightInchesInput.value) || ""
+  };
+  saveProfile();
+  renderStats();
+  renderWeeklyProgress();
+  renderMonthlyProgress();
+  personalStatus.textContent = "Personal info saved. Calories updated.";
 }
 
 function estimatedExerciseMet(exercise) {
@@ -1041,6 +1091,7 @@ function render() {
   renderWeeklyProgress();
   renderMonthlyProgress();
   renderHistory();
+  renderPersonalProfile();
 }
 
 function setActiveTab(tabName) {
@@ -1049,9 +1100,9 @@ function setActiveTab(tabName) {
   });
 
   tabPanels.forEach((panel) => {
-    panel.hidden = panel.dataset.tabPanel === "progress"
-      ? tabName !== "progress"
-      : tabName === "progress";
+    panel.hidden = panel.dataset.tabPanel === "today"
+      ? !["today", "diary"].includes(tabName)
+      : panel.dataset.tabPanel !== tabName;
   });
 
   if (formPanel) {
@@ -1067,7 +1118,7 @@ function setActiveTab(tabName) {
   }
 
   if (headerBand) {
-    headerBand.hidden = tabName === "progress" || tabName === "diary";
+    headerBand.hidden = tabName === "progress" || tabName === "diary" || tabName === "personal";
   }
 }
 
@@ -1793,6 +1844,7 @@ historyContainer.addEventListener("click", (event) => {
 });
 exportHistoryButton.addEventListener("click", exportSessions);
 importPasteButton.addEventListener("click", importPastedSessions);
+personalForm.addEventListener("submit", savePersonalProfile);
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -1826,9 +1878,10 @@ form.addEventListener("submit", (event) => {
 
 progressMonthInput.value = currentMonth();
 reviewWeekDateInput.value = todayISO();
+renderPersonalProfile();
 resetForm();
 render();
-setActiveTab(window.location.hash === "#progress" ? "progress" : window.location.hash === "#diary" ? "diary" : "today");
+setActiveTab(window.location.hash === "#progress" ? "progress" : window.location.hash === "#diary" ? "diary" : window.location.hash === "#personal" ? "personal" : "today");
 
 if ("serviceWorker" in navigator && window.location.protocol !== "file:") {
   navigator.serviceWorker.register("./sw.js", { updateViaCache: "none" }).then((registration) => {
